@@ -1,0 +1,22 @@
+@use '../abstracts/variables' as v;
+
+label {
+    display: block;
+    margin: .75rem 0 .25rem;
+    font-size: .9rem;
+    color: v.$color-muted;
+}
+
+input {
+    width: 100%;
+    padding: .7rem .8rem;
+    border-radius: 10px;
+    border: 1px solid #1f2937;
+    background: #0b1220;
+    color: v.$color-text;
+    outline: none;
+
+    &:focus {
+        border-color: v.$color-accent;
+    }
+}

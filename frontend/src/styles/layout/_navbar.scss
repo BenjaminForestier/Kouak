@@ -1,0 +1,32 @@
+@use '../abstracts/variables' as v;
+@use '../abstracts/mixins' as m;
+
+.nav {
+    background: v.$color-card;
+    padding: 1rem 2rem;
+    border-radius: 0 0 12px 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .3);
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2rem;
+
+    a {
+        color: v.$color-text;
+        text-decoration: none;
+        font-weight: 600;
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        transition: 0.2s;
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.08);
+        }
+    }
+
+    .active {
+        background: v.$color-accent;
+        color: #fff;
+    }
+}

@@ -1,0 +1,36 @@
+@use '../abstracts/variables' as v;
+@use '../abstracts/mixins' as m;
+
+.login-page {
+    @include m.flex-center;
+
+    .card {
+        @include m.card;
+        width: 350px;
+
+        h1 {
+            text-align: center;
+            margin-bottom: v.$spacer;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+
+            input {
+                margin-bottom: 0.75rem;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
+
+        .muted {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: v.$color-muted;
+            text-align: center;
+        }
+    }
+}

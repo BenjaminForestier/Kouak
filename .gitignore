@@ -1,0 +1,15 @@
+# Node.js
+node_modules/
+package-lock.json
+
+# Environment
+.env
+.env.local
+
+# Sequelize SQLite DB (si utilisé)
+*.sqlite
+*.sqlite3
+
+# Build (frontend)
+dist/
+build/

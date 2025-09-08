@@ -1,0 +1,11 @@
+@use '../abstracts/variables' as v;
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 1rem;
+
+    >.nav {
+        margin-bottom: 2rem;
+    }
+}
