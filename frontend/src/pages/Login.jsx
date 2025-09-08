@@ -15,7 +15,7 @@ export default function Login() {
             const { data } = await api.post('/auth/login', { email, password })
             localStorage.setItem('token', data.token)
             localStorage.setItem("username", data.username)
-            navigate('/users')
+            navigate('/chat')
         } catch (err) {
             setError(err.response?.data?.message || 'Erreur de connexion')
         }

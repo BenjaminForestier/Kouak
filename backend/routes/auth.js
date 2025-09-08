@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.post("/register", async (req, res) => {
     try {
-        console.log("📥 Données reçues :", req.body);
+        console.log("Données reçues :", req.body);
         const { username, email, password } = req.body;
 
         const existingUser = await User.findOne({ where: { email } });
@@ -23,7 +23,7 @@ router.post("/register", async (req, res) => {
 
         res.status(201).json({ message: "Utilisateur créé", user: { id: user.id, username, email } });
     } catch (err) {
-        console.error("❌ Erreur à l'inscription :", err);
+        console.error("Erreur à l'inscription :", err);
         res.status(500).json({ message: "Erreur serveur", error: err.message });
     }
 });

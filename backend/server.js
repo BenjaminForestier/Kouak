@@ -21,8 +21,6 @@ app.use(express.json());
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
 
-console.log("🚀 Socket.io prêt à écouter");
-
 const io = new Server(server, {
     cors: {
         origin: "http://localhost:5173",
@@ -31,24 +29,37 @@ const io = new Server(server, {
     }
 });
 
+let onlineUsers = new Map();
+
 io.on("connection", (socket) => {
-    console.log("🟢 Un utilisateur est connecté :", socket.id);
+    console.log("Un utilisateur est connecté :", socket.id);
+
+    socket.on("userConnected", ({ username }) => {
+        onlineUsers.set(username, socket.id);
+        io.emit("onlineUsers", Array.from(onlineUsers.keys()));
+    });
 
     socket.on("chatMessage", (msg) => {
-        console.log("💬 Message reçu :", msg);
-        io.emit("chatMessage", msg);
+        console.log("Message reçu :", msg);
+        io.emit("chatMessage", { user: msg.user, text: msg.text });
     });
 
     socket.on("disconnect", () => {
-        console.log("🔴 Un utilisateur s'est déconnecté :", socket.id);
+        for (let [user, id] of onlineUsers.entries()) {
+            if (id === socket.id) {
+                onlineUsers.delete(user);
+            }
+        }
+        io.emit("onlineUsers", Array.from(onlineUsers.keys()));
     });
 });
 
+
 sequelize.authenticate()
-    .then(() => console.log("✅ Database connected"))
-    .catch((err) => console.error("❌ Database error:", err));
+    .then(() => console.log("Database connected"))
+    .catch((err) => console.error(" Database error:", err));
 
 const PORT = process.env.PORT || 4000;
 server.listen(PORT, () => {
-    console.log(`✅ Server running on http://localhost:${PORT}`);
+    console.log(`Server running on http://localhost:${PORT}`);
 });
