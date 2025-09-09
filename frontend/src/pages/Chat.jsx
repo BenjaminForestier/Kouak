@@ -13,18 +13,24 @@ export default function Chat() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        // Charger tous les utilisateurs en BDD
         api.get("/users").then((res) => setAllUsers(res.data));
 
         const newSocket = io("http://localhost:4000", {
             transports: ["websocket"],
             withCredentials: true,
+            auth: {
+                token: localStorage.getItem("token")
+            }
         });
         setSocket(newSocket);
 
         if (username) {
             newSocket.emit("userConnected", { username });
         }
+
+        newSocket.on("chatHistory", (msgs) => {
+            setMessages(msgs);
+        });
 
         newSocket.on("chatMessage", (msg) => {
             setMessages((prev) => [...prev, msg]);
@@ -42,7 +48,11 @@ export default function Chat() {
     const sendMessage = (e) => {
         e.preventDefault();
         if (message.trim() && socket) {
-            socket.emit("chatMessage", { user: username, text: message });
+            socket.emit("chatMessage", {
+                user: username,
+                userId: localStorage.getItem("userId"),
+                text: message
+            });
             setMessage("");
         }
     };

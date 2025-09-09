@@ -1,12 +1,13 @@
 @use '../abstracts/variables' as v;
 @use '../abstracts/mixins' as m;
 
-.register-page {
+.connexion-page {
     @include m.flex-center;
+    height: 100%;
 
     .card {
         @include m.card;
-        width: 380px;
+        width: 20%;
 
         h1 {
             text-align: center;

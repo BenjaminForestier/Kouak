@@ -13,8 +13,9 @@ export default function Login() {
         setError(null)
         try {
             const { data } = await api.post('/auth/login', { email, password })
-            localStorage.setItem('token', data.token)
-            localStorage.setItem("username", data.username)
+            localStorage.setItem('token', data.token);
+            localStorage.setItem("userId", data.user.id);
+            localStorage.setItem("username", data.username);
             navigate('/chat')
         } catch (err) {
             setError(err.response?.data?.message || 'Erreur de connexion')
@@ -22,7 +23,7 @@ export default function Login() {
     }
 
     return (
-        <div className="login-page">
+        <div className="connexion-page">
             <div className="card">
                 <h1>Connexion</h1>
                 {error && <div className="alert">{error}</div>}

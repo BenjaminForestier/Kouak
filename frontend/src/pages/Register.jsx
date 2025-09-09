@@ -21,7 +21,7 @@ export default function Register() {
     }
 
     return (
-        <div className='register-page'>
+        <div className='connexion-page'>
             <div className="card">
                 <h1>Inscription</h1>
                 {error && <div className="alert">{error}</div>}
