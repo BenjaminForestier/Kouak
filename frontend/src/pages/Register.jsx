@@ -42,7 +42,7 @@ export default function Register() {
                 </form>
 
                 <p className="muted">
-                    Déjà inscrit ? <Link to="/login">Se connecter</Link>
+                    Déjà inscrit ? <Link to="/login"><u>Se connecter</u></Link>
                 </p>
             </div>
         </div>

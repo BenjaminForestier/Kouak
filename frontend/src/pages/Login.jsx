@@ -41,7 +41,7 @@ export default function Login() {
                 </form>
 
                 <p className="muted">
-                    Pas de compte ? <Link to="/register">Créer un compte</Link>
+                    Pas de compte ? <Link to="/register"><u>Créer un compte</u></Link>
                 </p>
             </div>
         </div>
